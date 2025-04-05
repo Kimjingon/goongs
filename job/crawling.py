@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from mysql_client import MysqlClient
+from client.mysql_client import MysqlClient
 
 if __name__ == "__main__":
 
@@ -40,5 +40,6 @@ if __name__ == "__main__":
     )
     columns = ["year_month_id", "cnt"]
     table = "car_cnt_info"
+    print(rows)
     db.insert_data(data=rows, columns=columns, table=table)
     db.close()

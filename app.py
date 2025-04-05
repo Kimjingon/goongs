@@ -2,7 +2,7 @@ import importlib
 
 import streamlit as st
 
-from mysql_client import MysqlClient
+from client.mysql_client import MysqlClient
 
 st.set_page_config(page_title="test", initial_sidebar_state="collapsed")
 
@@ -18,9 +18,9 @@ def get_db():
 
 
 PAGES = {
-    "홈": "home",
-    "차량 등록 현황": "car",
-    "차량 FAQ": "faq"
+    "홈": "page.home",
+    "차량 등록 현황": "page.car",
+    "차량 FAQ": "page.faq"
 }
 
 selection = st.sidebar.selectbox("메뉴", list(PAGES.keys()))

@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def show(db):
-    st.title("🚗 자동차 등록 현황")
+    st.title("자동차 등록 현황")
     date_range = db.get_date_range()
     min_date = pd.to_datetime(date_range["min_date"], format="%Y-%m")
     max_date = pd.to_datetime(date_range["max_date"], format="%Y-%m")
