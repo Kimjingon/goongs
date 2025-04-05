@@ -27,11 +27,9 @@ class MysqlClient:
             print("MySQL 에러 발생 (insert_data):", e)
             return None
 
-    def get_data(self, columns, table, filter_clause: str = None):
+    def get_faq_data(self):
         try:
-            sql = f"SELECT {', '.join(f'`{col}`' for col in columns)} FROM {table}"
-            if filter_clause:
-                sql += f" WHERE {filter_clause}"
+            sql = f"SELECT title, content FROM faq"
             self.cursor.execute(sql)
             return self.cursor.fetchall()
         except MySQLError as e:

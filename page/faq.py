@@ -19,7 +19,7 @@ def show(db):
     st.title("FAQ")
     columns = ["title", "content"]
     table = "faq"
-    all_posts = db.get_data(columns=columns, table=table)
+    all_posts = db.get_faq_data()
 
     total_posts = len(all_posts)
     total_pages = (total_posts - 1) // POSTS_PER_PAGE + 1
