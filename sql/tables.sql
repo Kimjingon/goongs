@@ -5,7 +5,8 @@ CREATE TABLE `car_cnt_info` (
                                 KEY `car_cnt_info_year_month_id_index` (`year_month_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='월별 차량 수'
 
-
+CREATE INDEX car_cnt_info_idx
+    ON car_cnt_info (year_month_id);
 
 CREATE TABLE `faq` (
                        `id` int NOT NULL AUTO_INCREMENT,
