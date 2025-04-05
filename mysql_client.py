@@ -16,7 +16,10 @@ class MysqlClient:
 
     def insert_data(self, data, columns, table):
         try:
-            sql = f"INSERT INTO {table}  ({', '.join(f'`{col}`' for col in columns)}) VALUES (%s, %s)"
+            sql = f"""
+                 INSERT INTO `{table}` ({', '.join(f'`{col}`' for col in columns)})
+                 VALUES ({', '.join(['%s'] * len(columns))})
+                """
             self.cursor.executemany(sql, data)
             self.conn.commit()
             return self.cursor.rowcount
@@ -31,6 +34,25 @@ class MysqlClient:
                 sql += f" WHERE {filter_clause}"
             self.cursor.execute(sql)
             return self.cursor.fetchall()
+        except MySQLError as e:
+            print("MySQL 에러 발생 (get_data):", e)
+            return None
+
+    def get_car_data(self, start_date:str, end_date:str):
+        try:
+            sql = f"SELECT year_month_id, cnt  FROM car_cnt_info WHERE year_month_id > '{start_date}'" \
+                  f" and year_month_id < '{end_date}' ORDER BY year_month_id"
+            self.cursor.execute(sql)
+            return self.cursor.fetchall()
+        except MySQLError as e:
+            print("MySQL 에러 발생 (get_data):", e)
+            return None
+
+    def get_date_range(self):
+        try:
+            sql = "SELECT min(year_month_id) as min_date, max(year_month_id) as max_date FROM car_cnt_info"
+            self.cursor.execute(sql)
+            return self.cursor.fetchone()
         except MySQLError as e:
             print("MySQL 에러 발생 (get_data):", e)
             return None
