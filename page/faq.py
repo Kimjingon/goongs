@@ -17,8 +17,6 @@ def get_pagination_range(current_page, total_pages):
 
 def show(db):
     st.title("FAQ")
-    columns = ["title", "content"]
-    table = "faq"
     all_posts = db.get_faq_data()
 
     total_posts = len(all_posts)
